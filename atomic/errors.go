@@ -6,6 +6,24 @@ const (
 	ERR_FORBIDDEN             = "SsKEOBm0hk1NZTXTyXdp2"
 )
 
+func NewError(
+	uuid string,
+	eng string,
+	zht string,
+	zhs string,
+) (errUUID string) {
+	if _, ok := Engine.Errors[uuid]; ok {
+		panic("Error UUID already exists: " + uuid)
+	}
+	Engine.Errors[uuid] = &Error{
+		UUID: uuid,
+		Eng:  eng,
+		Zht:  zht,
+		Zhs:  zhs,
+	}
+	return uuid
+}
+
 func (e *engine) initErrors() {
 	e.Errors[ERR_INTERNAL_SERVER_ERROR] = &Error{
 		UUID: ERR_INTERNAL_SERVER_ERROR,

@@ -37,10 +37,14 @@ func (e *engine) registerCORS() {
 
 func (e *engine) databaseMigrate() {
 	if len(e.DBMigrates) > 0 {
-		e.DB.AutoMigrate(e.DBMigrates...)
+		if err := e.DB.AutoMigrate(e.DBMigrates...); err != nil {
+			panic(err)
+		}
 	}
 	if len(e.MEMMigrates) > 0 {
-		e.MEM.AutoMigrate(e.MEMMigrates...)
+		if err := e.MEM.AutoMigrate(e.MEMMigrates...); err != nil {
+			panic(err)
+		}
 	}
 }
 

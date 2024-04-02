@@ -174,6 +174,12 @@ func (e *engine) initEnvironments() {
 	/*
 		Database
 	*/
+	e.Environment[DB_TYPE] = &Environment{
+		Key:   DB_TYPE,
+		Type:  "string",
+		Value: env.String(DB_TYPE, ""),
+		Note:  "Database type",
+	}
 	e.Environment[MYSQL_HOST] = &Environment{
 		Key:   MYSQL_HOST,
 		Type:  "string",

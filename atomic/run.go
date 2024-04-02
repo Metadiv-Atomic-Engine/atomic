@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Metadiv-Atomic-Engine/sql"
 	"github.com/gin-contrib/cache"
 	"github.com/gin-contrib/cache/persistence"
 	"github.com/gin-contrib/cors"
@@ -17,6 +18,11 @@ import (
 )
 
 func (e *engine) Run() {
+
+	if e.EnvString(DB_ENCRYPT_KEY) != "" {
+		sql.SetEncryptKey(e.EnvString(DB_ENCRYPT_KEY))
+	}
+
 	e.registerCORS()
 	e.dependencyChecking()
 	e.databaseMigrate()

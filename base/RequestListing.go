@@ -20,3 +20,14 @@ func (r *RequestListing) BuildSimilarClause(fields ...string) *sql.Clause {
 	}
 	return sql.Or(clauses...)
 }
+
+func (r *RequestListing) BuildDecryptedSimilarClause(fields ...string) *sql.Clause {
+	var clauses = make([]*sql.Clause, 0)
+	for _, field := range fields {
+		clauses = append(clauses, sql.DecryptSimilar(field, r.Keyword))
+	}
+	if len(clauses) == 0 {
+		return nil
+	}
+	return sql.Or(clauses...)
+}

@@ -7,7 +7,7 @@ import (
 
 func (e *engine) initDatabase() {
 
-	if e.EnvString(GIN_MODE) == gin.ReleaseMode {
+	if e.EnvString(GIN_MODE) == gin.ReleaseMode || e.EnvString(DB_TYPE) == "mysql" {
 		DB, err := sql.MySQL(
 			e.EnvString(MYSQL_HOST),
 			e.EnvString(MYSQL_PORT),
